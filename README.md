@@ -1,5 +1,5 @@
-# GMOD13 Toybox
-GMOD toybox brought back to the latest version.
+# Garry's Mod 13: Toybox
+Garry's Mod toybox brought back to the latest version.
 This project started back in november 2015 and was something that i wanted back to easly mount addons and play with other peoples content. I have since forgotten about this project so its here for people to work on and will gladly allow someone to take over and manage it.
 
 ## Useful links
