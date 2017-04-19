@@ -1,0 +1,6 @@
+"AddonInfo"
+{
+	"name" "Toybox for gmod13"
+	"author_name" "rtm516"
+	"info" "Toybox for gmod13"
+}
