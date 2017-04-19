@@ -1,0 +1,149 @@
+.comments
+{
+    padding: 30px 0px;
+    margin: 0px auto;
+    max-width: 600px;
+}
+
+.comments .comment
+{
+    margin: 8px 0px;
+    text-align: left;
+    background-color: #eee;
+    color: #222;
+    font-size: 13px;
+    min-height: 50px;
+
+    -moz-border-radius: 5px 5px 0 0; 
+    -webkit-border-radius: 5px 5px 0 0;
+    position: relative;
+    left: 1px;
+}
+
+.comments .comment .author
+{
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: bolder;
+    height: 20px;
+	
+	-webkit-border-radius: 5px 5px 0 0;
+	background-color: rgba( 240, 240, 240, 0.7 );
+	border-bottom: 1px solid rgba( 0, 0, 0, 0.3 );
+}
+
+.comments .comment .author A
+{
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.banned .author A
+{
+    color: red !important;
+}
+
+.comments .comment .author IMG
+{
+    border: 0;
+    margin: 5px auto;
+}
+
+.comments .comment .text
+{
+    min-height: 45px;
+}
+
+.comments .comment .text
+{
+    margin: 30px;
+}
+
+.comments .creator
+{
+    background-color: #ffd;
+}
+
+.comments .comment .meta
+{
+    clear: both;
+    padding: 0px 8px 5px 8px;
+    text-align: left;
+    background-color: #ddd;
+    border-top: 1px solid #888;
+    color: #222;
+    font-size: 10px;
+    -moz-border-radius: 0 0 5px 5px; 
+    -webkit-border-radius: 0 0 5px 5px;
+    color: #888;
+	
+	background-image: -webkit-gradient(
+		linear,
+		right bottom,
+		left bottom,
+		color-stop(0.0, rgb(188,188,188)),
+		color-stop(0.5, rgb(218,218,218))
+	);
+}
+
+.comments .comment .meta IMG
+{
+    position: relative;
+    top: 3px;
+}
+
+
+.comments textarea
+{
+    width: 400px;
+    height: 100px;
+    -moz-border-radius: 2px; 
+    -webkit-border-radius: 2px;
+    border: 0;
+}
+
+#commentform
+{
+    margin: 20px auto;
+    padding: 20px;
+    width: 440px;
+}
+
+.comments input
+{
+    position: relative;
+    width: 400px;
+}
+
+.avatar
+{
+    background-color: black;
+    width: 64px;
+    height: 64px;
+    border: 2px solid #333;
+    -moz-border-radius: 4px; 
+    -webkit-border-radius: 4px;
+    margin: 10px;
+    margin-top: 0;
+    float: left;
+    position: absolute;
+    left: -1px;
+}
+
+.avatar IMG
+{
+    position: relative;
+//    top: -5px;
+}
+
+.banned .avatar
+{
+    background-color: red !important;
+    border: 2px solid red!important;
+}
+
+IMG.emote
+{
+    position: relative;
+    top: 3px;
+}

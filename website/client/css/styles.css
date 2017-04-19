@@ -1,0 +1,613 @@
+BODY
+{
+    padding: 0px;
+    margin: 0px 0px;
+    font-family: Helvetica;
+    background-color: #2a2a2a;
+    color: #eee;
+}
+
+IMG
+{
+	border: 0;
+}
+
+#header
+{
+    -webkit-box-reflect: below 1px -webkit-gradient( linear, 0 0, 0 120%, from(transparent), color-stop(.5, transparent), to(white) );
+    text-align: left;
+    padding: 0px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    background-color: #4096EE;
+    margin-bottom: 30px;
+	
+}
+
+#header #title
+{
+    padding: 8px 8px 0px 16px;
+}
+
+#navbar
+{
+    font-size: 14px;
+    padding: 4px;
+    padding-left: 32px;
+    font-weight: bolder;
+}
+
+#navbar A
+{
+    color: #333;
+    text-decoration: none;
+}
+
+#navbar A:hover
+{
+    color: #fff;
+}
+
+H1
+{
+    -webkit-box-reflect: below -3px -webkit-gradient(linear, 0 0, 0 200%, from(transparent), color-stop(.1, transparent), to(white));
+    text-align: left;
+}
+
+A
+{
+    color: #0af;
+}
+
+#content
+{
+    margin: 30px;
+	text-align: center;
+}
+
+#footer
+{
+    margin-top: 100px;
+    text-align: center;
+    font-size: 10px;
+    color: #444;
+}
+
+
+#footer
+{
+    text-align: center;
+    font-size: 10px;
+    color: #444;
+}
+
+.CodeMirror-line-numbers 
+{
+	margin: .4em;
+	padding: 5;
+	font-family: monospace;
+	font-size: 10pt;
+	color: #999;
+	text-align: right;
+	width: 50px;
+}
+
+.warning
+{
+	padding: 5px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 10px;
+	background-color: #ff0;
+	border: 3px solid #f00;
+	color: #333;
+	width: 400px;
+}
+
+.cloudscriptbox
+{
+    background-color: #fff;
+    width: 400px;
+    position: relative;
+    height: 148px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -moz-box-shadow: 2px 2px 8px rgba( 0, 0, 0, 0.4 );
+    -webkit-box-shadow: 2px 2px 8px rgba( 0, 0, 0, 0.4 );
+    box-shadow: 2px 2px 8px rgba( 0, 0, 0, 0.4 );
+    display: inline-block;
+    margin: 8px;
+    text-align: center;
+}
+
+.cloudscriptbox .thumb
+{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.cloudscriptbox .title
+{
+    position: absolute;
+    left: 148px;
+    top: 10px;
+    font-size: 30px;
+    font-weight: bolder;
+    letter-spacing: -3px;
+    overflow: display;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.cloudscriptbox .state
+{
+    position: absolute;
+    left: 340px;
+    top: 10px;
+    width: 50px;
+    font-size: 10px;
+    font-weight: bolder;
+    overflow: display;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #555;
+    text-align: right;
+}
+
+
+.cloudscriptbox .meta
+{
+    position: absolute;
+    left: 148px;
+    top: 115px;
+    height: 30px;
+    width: 240px;
+}
+
+.cloudscriptbox .links
+{
+    position: absolute;
+    left: 10px;
+    top: 120px;
+    font-size: 11px;
+    width: 128px;
+    height: 16px;
+}
+
+.cloudscriptbox .links A
+{
+    background-color: rgba( 255, 255, 255, 0.4 );
+    color: rgba( 0, 0, 0, 0.4 );
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding: 1px 6px;
+    text-decoration: none;
+}
+
+.cloudscriptbox .links A:hover
+{
+    background-color: rgba( 255, 255, 255, 1.0 );
+    color: #5af;
+}
+
+.cloudscriptbox .desc
+{
+   position: absolute;
+    left: 160px;
+    top: 60px;
+    width: 220px;
+    overflow: hidden;
+    height: 45px;
+    font-size: 11px;
+    text-align: left;
+    color: #888;
+}
+
+.cloudscriptbox .meta DIV
+{
+    float: left;
+    width: 40px;
+    font-size: 9px;
+    text-align: left;
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    height: 16px;
+    line-height: 16px;
+    color: #444;
+}
+
+.cloudscriptbox .meta .downloads
+{
+    background-image: url( '/client/icon_downloads.png' );
+}
+
+.cloudscriptbox .meta .rate_good
+{
+    background-image: url( '/client/icon_goods.png' );
+}
+
+.cloudscriptbox .meta .rate_buggy
+{
+    background-image: url( '/client/icon_bugs.png' );
+}
+
+.cloudscriptbox .meta .comments
+{
+    background-image: url( '/client/icon_comments.png' );
+	padding: 0;
+	margin: 0;
+	padding-left: 20px;
+}
+
+#youruploads .upload .size
+{
+    float: right;
+    width: 70px;
+    text-align: left;
+    font-size: 11px;
+}
+
+#youruploads .upload
+{
+    width: 600px;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 12px;
+    height: 25px;
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    background-image: url( '/client/types/unknown.png' );
+}
+
+#youruploads .vmt
+{
+    background-image: url( '/client/types/vmt.png' );
+}
+
+#youruploads .vtf
+{
+    background-image: url( '/client/types/vtf.png' );
+}
+
+#youruploads .wav
+{
+    background-image: url( '/client/types/wav.png' );
+}
+
+#youruploads .mdl
+{
+    background-image: url( '/client/types/mdl.png' );
+}
+
+#youruploads, #uploadcontent
+{
+    background-color: #fff;
+    width: 600px;
+    margin: 0 auto;
+    padding: 16px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    color: #555;
+}
+
+#uploadcontent P
+{
+    font-size: 14px;
+    text-align: left;
+    margin: 10px 60px;
+}
+
+#uploadcontent form
+{
+    margin-top: 50px;
+}
+
+DIV.tabs
+{
+    text-align: left;
+}
+
+DIV.tabs UL
+{
+    margin: 0;
+    padding: 0
+}
+
+DIV.tabs LI
+{
+    display: inline-block;
+    min-width: 90px;
+    list-style-type:none; 
+    -webkit-border-radius: 3px 3px 0 0;
+    -moz-border-radius: 3px 3px 0 0;
+    padding-right: 10px;
+    font-size: 14px;
+    opacity: 0.5;
+    background-color: #fff;
+    margin-right: 1px;
+    font-weight: bold;
+    letter-spacing: -0.7px;
+    border-bottom: 1px solid #555;
+}
+
+DIV.tabs LI IMG
+{
+    float: left;
+    margin-right: 6px;
+}
+
+DIV.tabs LI.active
+{
+    opacity: 1.0 !important;
+    border-bottom: 1px solid #fff;
+}
+
+DIV.tabs LI A
+{
+    color: #444;
+    text-decoration: none;
+    display: block;
+    padding: 8px;
+    
+}
+
+DIV.tabs LI:hover
+{
+    opacity: 0.7;
+}
+
+DIV.tabinner
+{
+    background-color: #fff;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px 6px;
+    padding: 16px;
+    color: #333;
+}
+
+label
+{
+    width: 90px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 2px;
+    vertical-align: top;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+FORm.niceform
+{
+    width: 550px;
+    text-align: left;
+    margin: 20px auto;
+}
+
+FORm.niceform input.text, FORm.niceform TEXTAREA, FORM.NiceForm DIV.radiobox UL LI
+{
+    font-size: 11px;
+    font-family: Arial, Verdana;
+    color: #333;
+}
+
+FORm.niceform input.text, FORm.niceform TEXTAREA, FORM.NiceForm DIV.radiobox UL
+{ 
+    width: 400px;
+    background-color: #fafafa;
+    border: 1px solid #888;
+    padding: 3px;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+} 
+
+FORm.niceform TEXTAREA
+{
+    height: 100px;
+    padding: 8px;
+}
+
+FORm.niceform input.text:focus, FORm.niceform TEXTAREA:focus
+{
+    background-color: #ffa;
+    border: 1px solid #fa0;
+}
+
+FORM.NiceForm DIV.radiobox UL
+{
+    display: inline-block;
+    width: auto;
+    padding: 8px;
+    margin: 0;
+}
+
+FORM.NiceForm DIV.radiobox UL LI
+{
+    margin: 0;
+    padding:0;
+    list-style-type:none; 
+}
+
+FORM.NiceForm .submit
+{
+    margin: 20px auto;
+    text-align: center;
+    min-width: 100px;
+}
+
+DIV.notice
+{
+    font-size: 12px;
+    color: #740;
+    margin: 16px auto;
+    border: 1px solid #fc5;
+    background-color: #ffa;
+    padding: 10px;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+FORM.NiceForm DIV.notice B
+{
+    color: #210;
+}
+
+DIV.errorlist
+{
+    text-align: left;
+    width: 800px;
+    margin: 0 auto;
+}
+
+DIV.errorlist LI
+{
+    margin-left: 10px;
+    list-style-type:none; 
+    font-size: 12px;
+}
+
+#FileManager
+{
+    width: 900px;
+    height: 500px;
+    margin: 0 auto;
+    border: 1px solid #888;
+    background-color: #ddd;
+}
+
+#FileManager #Left, #FileManager #Right
+{
+    overflow: auto;
+    width: 49%;
+    height: 98%;
+    background-color: white;
+    border: 1px solid #888;
+    text-align: left;
+    float: left;
+    margin-left: 5px;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+#FileManager UL
+{
+    margin: 10px;
+    padding: 0;
+    list-style-type:none; 
+}
+
+#FileManager LI
+{
+    height: 16px;
+    background-image: url( '/client/famfam/page.png' );
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    margin-bottom: 1px;
+    white-space: nowrap;
+}
+
+
+#FileManager LI.mdl
+{
+    background-image: url( '/client/famfam/brick.png' );
+}
+
+#FileManager LI.wav
+{
+    background-image: url( '/client/famfam/sound.png' );
+}
+
+#FileManager LI.vmt, #FileManager LI.vtf
+{
+    background-image: url( '/client/famfam/palette.png' );
+}
+
+.error
+{
+    text-align: center;
+    border: 4px dashed red;
+    background-color: yellow;
+    color: red;
+    padding: 20px;
+    font-weight: bolder;
+}
+
+#filesystem
+{
+    margin: 0 auto;
+    width: 90%;
+    background-color: #fff;
+    min-height: 400px;
+    overflow: auto;
+    padding: 20px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+#filesystem .fs_folder, #filesystem .fs_file
+{
+    float: left;
+    width: 120px;
+    height: 80px;
+    margin-right: 1px;
+    text-align: center;
+    font-size: 11px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+#filesystem .fs_file .name, #filesystem .fs_folder .name
+{ 
+    position: absolute;
+    top: 64px;
+    width: 110px;
+    left: 5px;
+    overflow: hidden;    
+}
+
+#filesystem .fs_file img, #filesystem .fs_folder img
+{
+    margin-top: 25px;
+}
+
+#filesystem .fs_folder A, #filesystem .fs_file A
+{ 
+    font-size: 11px;
+    color: #272;
+    text-decoration: none;
+}
+
+#filesystem .fs_file A
+{ 
+    color: #333;
+}
+
+#filesystem .files, #filesystem .folders
+{
+    clear: both;
+}
+
+#filesystem .breaker
+{
+    clear: both;
+    height: 20px;
+}
+
+.tooltip
+{
+    z-index: 100;
+}
+
+
+.tooltip TABLE TD
+{
+    font-size: 11px;
+    color: #333;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}

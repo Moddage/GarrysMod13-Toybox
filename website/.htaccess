@@ -1,0 +1,9 @@
+Options -Indexes
+
+order deny,allow
+deny from all
+allow from 81.174.149.122
+
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
