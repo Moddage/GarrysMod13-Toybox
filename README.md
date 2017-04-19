@@ -10,6 +10,7 @@ Note alot of the content in here is part of the old site and other libraries.
 - [Development site](https://toybox.rtm516.co.uk/ingame/)
 - [Trello (keep track of progress)](https://trello.com/b/MFfdCxaD/garry-s-mod-13-toybox)
 - [Where i got the site files (Wayback machine)](http://web.archive.org/web/*/http://toybox.garrysmod.com/)
+- [Facepunch thread](https://facepunch.com/showthread.php?t=1561002)
 - [Old facepunch thread](https://facepunch.com/showthread.php?t=1510102)
 - [Old-old facepunch thread](https://facepunch.com/showthread.php?t=1509545)
 - [My website](https://rtm516.co.uk/)
