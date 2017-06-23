@@ -1,6 +1,6 @@
 # Garry's Mod 13: Toybox
 Garry's Mod toybox brought back to the latest version.
-This project started back in november 2015 and was something that i wanted back to easly mount addons and play with other peoples content. I have since forgotten about this project so its here for people to work on and will gladly allow someone to take over and manage it.
+This project started back in november 2015 and was something that i wanted back to easly mount addons and play with other peoples content.
 The project has been taken over by [LeadKiller](http://steamcommunity.com/id/LeadKiller/) in its new home on the [workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=837437572).
 
 Note alot of the content in here is part of the old site and other libraries.
