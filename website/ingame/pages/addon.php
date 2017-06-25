@@ -16,8 +16,8 @@
 
 	$addon["uploadDate"] = mysqli_time_format($addon["uploadDate"])." GMT";
 
-	if(file_exists('../uploads/images/'.$id.'_thumb_128.png')){
-		$image = '/uploads/images/'.$id.'_thumb_128.png';
+	if(file_exists('../uploads/images/'.$id.'_thumb_128.jpg')){
+		$image = '/uploads/images/'.$id.'_thumb_128.jpg';
 	}else{
 		$image = '/client/no_thumb_128.png';
 	}
