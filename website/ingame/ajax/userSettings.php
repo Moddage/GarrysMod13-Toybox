@@ -26,7 +26,7 @@
 
 		if(!empty($recaptcha)) {
 			$google_url="https://www.google.com/recaptcha/api/siteverify";
-			$secret='6Lf9hBETAAAAAILMMKdXHqlE27d4zuhDeKteQiO9';
+			$secret='*SECRETKEYREMOVED*';
 			$ip=$_SERVER['REMOTE_ADDR'];
 			$url=$google_url."?secret=".$secret."&response=".$recaptcha."&remoteip=".$ip;
 			$res=file_get_contents($url);
