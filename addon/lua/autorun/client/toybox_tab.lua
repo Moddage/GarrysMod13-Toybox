@@ -14,7 +14,7 @@ function PANEL:Paint()
 	if (!self.Started) then
 		self.Started = true;
 
-		local homeURL = "http://toybox.rtm516.co.uk/ingame/"
+		local homeURL = "http://funbox.lethal-direct.com/ingame/"
 		
 		self.HTML = vgui.Create("DHTML", self)
 		self.HTML:Dock(FILL)
