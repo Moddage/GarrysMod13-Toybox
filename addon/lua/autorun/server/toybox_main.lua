@@ -18,7 +18,7 @@ net.Receive("ToyboxSpawnWep", function(len, ply)
 	ply:SelectWeapon(swep)
 end)
 
-net.Receive("funboxSpawnEnt", function(len, ply)
+net.Receive("ToyboxSpawnEnt", function(len, ply)
 local ent = net.ReadString()
 local spawnfunc
 local vStart = ply:EyePos()
