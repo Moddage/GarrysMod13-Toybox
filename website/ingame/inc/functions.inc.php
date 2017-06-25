@@ -1,6 +1,6 @@
 <?php
 	function getProfileInfo($user_id) {
-		$json_playerinfo = file_get_contents("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=977D33DABEDAE59A09CC27B0E7E477E7&steamids=".$user_id);
+		$json_playerinfo = file_get_contents("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=*APIKEYREMOVED*&steamids=".$user_id);
 		$playerinfo = json_decode($json_playerinfo);
 		$playerinfo = (array) $playerinfo;
 		$playerinfo = (array) $playerinfo["response"];
