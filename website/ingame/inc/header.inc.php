@@ -45,7 +45,6 @@
 									$_SESSION["account_created"] = false;
 								}
 							}
-
 							if (!isset($_SESSION["nickname"])){
 								$steam64id = $steamprofile['steamid'];
 
@@ -56,13 +55,13 @@
 								$data=mysqli_fetch_assoc($result);
 
 								if($data['display_name'] != ""){
-									$_SESSION["account_created"] = $data['display_name'];
+									$_SESSION["display_name"] = $data['display_name'];
 								}else{
-									$_SESSION["account_created"] = $name;
+									$_SESSION["display_name"] = $name;
 								}
 							}
 
-							$steamprofile['personaname'] = $_SESSION["account_created"];
+							$steamprofile['personaname'] = $_SESSION["display_name"];
 
 							echo "<ul style=\"float: right; margin-top: 5.5px;\">".$steamprofile['personaname']."&nbsp;<a href=\"?show=settings\" class=\"use_tooltip\" title=\"User settings\"><img src=\"..\client\dortmund-16x16\settings.png\" style=\"vertical-align: top;\"></a>&nbsp;<a href=\"?show=upload\" class=\"use_tooltip\" title=\"Upload\"><img src=\"..\client\dortmund-16x16\sign-up.png\" style=\"vertical-align: top;\"></a>&nbsp;<a href=\"?logout\" class=\"use_tooltip\" title=\"Sign Out\"><img src=\"..\client\dortmund-16x16\sign-out.png\" style=\"vertical-align: top;\"></a>&nbsp;</ul>";
 						}
