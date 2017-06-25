@@ -108,7 +108,7 @@
 		}
 
 		$hasImage = true;
-		if(isset($_FILES['addonImg']['error']) || !is_array($_FILES['addonImg']['error'])) {
+		if(isset($_FILES['addonImg']['error']) && $_FILES['addonImg']['error'] != 0) {
 			$hasImage = false;
 		}else{
 			$check = getimagesize($_FILES["addonImg"]["tmp_name"]);
@@ -153,7 +153,7 @@
 
 		if(!empty($recaptcha)) {
 			$google_url="https://www.google.com/recaptcha/api/siteverify";
-			$secret='*REMOVED SECRET KEY*';
+			$secret='6Lf9hBETAAAAAILMMKdXHqlE27d4zuhDeKteQiO9';
 			$ip=$_SERVER['REMOTE_ADDR'];
 			$url=$google_url."?secret=".$secret."&response=".$recaptcha."&remoteip=".$ip;
 			$res=file_get_contents($url);
