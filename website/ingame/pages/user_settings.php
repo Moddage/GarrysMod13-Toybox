@@ -29,7 +29,7 @@
 				<div class="form-group">
 					<label for="inputCaptcha">Captcha:</label>
 					<?php if($disabled == ""): ?>
-					<div class="g-recaptcha" data-sitekey="6Lf9hBETAAAAACYJnCC75GYoETGpJjp2-R13T-ms"></div>
+					<div class="g-recaptcha" data-sitekey="*SITEKEYREMOVED*"></div>
 					<?php else: ?>
 					*DISABLED*
 					<?php endif; ?>
