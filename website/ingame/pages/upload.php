@@ -15,7 +15,7 @@
 				$disabled = "";
 				if($account_created == false){
 					$disabled = " disabled";
-					echo '<a class="btn btn-success" href="?show=settings">Account settings</button>';
+					echo 'Please head to settings to create an account before continuing<br><a class="btn btn-success" href="?show=settings">Account settings</a><br><br>';
 				}
 		?>
 
@@ -53,13 +53,13 @@
 				<div class="form-group">
 					<label for="inputCaptcha">Captcha: *</label>
 					<?php if($disabled == ""): ?>
-					<div class="g-recaptcha" data-sitekey="*REMOVED SITE KEY*"></div>
+					<div class="g-recaptcha" data-sitekey="6Lf9hBETAAAAACYJnCC75GYoETGpJjp2-R13T-ms"></div>
 					<?php else: ?>
 					*DISABLED*
 					<?php endif; ?>
 				</div>
 				
-				<button type="submit" class="btn btn-success">Upload addon</button>
+				<button type="submit" class="btn btn-success"<?php echo $disabled; ?>>Upload addon</button>
 			</form>
 			<small>* = required</small>
 		</div>
