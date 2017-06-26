@@ -1,6 +1,6 @@
-# Garry's Mod 13: Toybox
+# Garry's Mod 13: Funbox
 Garry's Mod toybox brought back to the latest version.
-This project started back in november 2015 and was something that i wanted back to easly mount addons and play with other peoples content.
+This project started back in november 2015 and was something that rtm516 wanted back to easly mount addons and play with other peoples content.
 The project has been taken over by [LeadKiller](http://steamcommunity.com/id/LeadKiller/) in its new home on the [workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=837437572).
 
 Note alot of the content in here is part of the old site and other libraries.
@@ -15,3 +15,4 @@ Note alot of the content in here is part of the old site and other libraries.
 - [Old facepunch thread](https://facepunch.com/showthread.php?t=1510102)
 - [Old-old facepunch thread](https://facepunch.com/showthread.php?t=1509545)
 - [My website](https://rtm516.co.uk/)
+- [Lethal Direct's site](https://lethal-direct.com/)
