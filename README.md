@@ -1,4 +1,4 @@
-# MOVED TO https://github.com/LeadKiller/GarrysMod13-Toybox
+# MOVED TO https://github.com/LeadKiller/Funbox
 
 # Garry's Mod 13: Toybox
 Garry's Mod toybox brought back to the latest version.
