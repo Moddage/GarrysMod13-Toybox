@@ -1,5 +1,3 @@
-# MOVED TO https://github.com/LeadKiller/Funbox
-
 # Garry's Mod 13: Toybox
 Garry's Mod toybox brought back to the latest version.
 This project started back in november 2015 and was something that i wanted back to easly mount addons and play with other peoples content.
