@@ -207,7 +207,7 @@ function LuaPrint(str)
 
 function LuaDownload(id, user, name)
 {
-	console.log("RUNLUA:ToyboxDownload( \""+id+"\", \""+user+"\", \""+name+"\" )")
+	console.log("RUNLUA:funboxDownload( \""+id+"\", \""+user+"\", \""+name+"\" )")
 }
 
 function IngameCheck(id, user, name)
