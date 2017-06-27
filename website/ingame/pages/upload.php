@@ -53,7 +53,7 @@
 				<div class="form-group">
 					<label for="inputCaptcha">Captcha: *</label>
 					<?php if($disabled == ""): ?>
-					<div class="g-recaptcha" data-sitekey="*SITEKEYREMOVED*"></div>
+					<div class="g-recaptcha" data-sitekey="6LfHoyYUAAAAAOWXyeqwlTYr9rqJoJVjpuvPCriX"></div>
 					<?php else: ?>
 					*DISABLED*
 					<?php endif; ?>

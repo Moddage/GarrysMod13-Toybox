@@ -56,7 +56,7 @@
 
 		if(!isset($_SESSION['steamid'])) {
 			http_response_code(400);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Sorry but you have to be logged in to do that.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Sorry but you have to be logged in to do that.</div>';
 			exit;
 		}else{
 			include('../../steamauth/userInfo.php');
@@ -66,44 +66,44 @@
 		if($steam64id == 0)
 		{
 			http_response_code(500);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Something went wrong and we couldn\'t upload your addon.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Something went wrong and we couldn\'t upload your addon.</div>';
 			exit;
 		}
 
 		if($_SESSION["account_created"] == false)
 		{
 			http_response_code(500);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Sorry but you first have to make an account <a href="?show=settings">here</a>.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Sorry but you first have to make an account <a href="?show=settings">here</a>.</div>';
 			exit;
 		}
 
 		if($type != "entity" && $type != "weapon" && $type != "prop") {
 			http_response_code(500);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Invalid type specified.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Invalid type specified.</div>';
 			exit;
 		}
 
 		if($title == "" || $desc == "") {
 			http_response_code(500);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> No title or description.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> No title or description.</div>';
 			exit;
 		}
 
 		if(strlen($title) < 3) {
 			http_response_code(500);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Title must be longer than 3 characters.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Title must be longer than 3 characters.</div>';
 			exit;
 		}
 
 		if(strlen($desc) < 5) {
 			http_response_code(500);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Description must be longer than 5 characters.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Description must be longer than 5 characters.</div>';
 			exit;
 		}
 
 		if(!isset($_FILES["addonFile"])) {
 			http_response_code(500);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> No addon file specified.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> No addon file specified.</div>';
 			exit;
 		}
 
@@ -114,26 +114,26 @@
 			$check = getimagesize($_FILES["addonImg"]["tmp_name"]);
 			if(!$check) {
 				http_response_code(500);
-				echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Invalid image specified.</div>';
+				echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Invalid image specified.</div>';
 				exit;
 			}
 
 			if ($_FILES["addonImg"]["size"] > return_bytes(ini_get('upload_max_filesize'))) {
 				http_response_code(500);
-				echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Uploaded image is to big.</div>';
+				echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Uploaded image is to big.</div>';
 				exit;
 			}
 
 			if(($check[0] > 128) || ($check[1] > 128)) {
 				http_response_code(500);
-				echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Size must be smaller than 128x128.</div>';
+				echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Size must be smaller than 128x128.</div>';
 				exit;
 			}
 
 			$addonImageType = pathinfo($_FILES["addonImg"]["name"], PATHINFO_EXTENSION);
 			if($addonImageType != "jpeg" && $addonImageType != "jpg") {
 				http_response_code(500);
-				echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Invalid image specified must be jpeg.</div>';
+				echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Invalid image specified must be jpeg.</div>';
 				exit;
 			}
 		}
@@ -141,19 +141,19 @@
 		$addonFileType = pathinfo($_FILES["addonFile"]["name"], PATHINFO_EXTENSION);
 		if($addonFileType != "gma") {
 			http_response_code(500);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Invalid addon file type specified.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Invalid addon file type specified.</div>';
 			exit;
 		}
 
 		if ($_FILES["addonFile"]["size"] > return_bytes(ini_get('upload_max_filesize'))) {
 			http_response_code(500);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Uploaded file is to big.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Uploaded file is to big.</div>';
 			exit;
 		}
 
 		if(!empty($recaptcha)) {
 			$google_url="https://www.google.com/recaptcha/api/siteverify";
-			$secret='*SECRETKEYREMOVED*';
+			$secret='6LfHoyYUAAAAAFOcK1nU0II1iNk8AT01jzIFb_HF';
 			$ip=$_SERVER['REMOTE_ADDR'];
 			$url=$google_url."?secret=".$secret."&response=".$recaptcha."&remoteip=".$ip;
 			$res=file_get_contents($url);
@@ -161,12 +161,12 @@
 
 			if(!$res['success']) {
 				http_response_code(400);
-				echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Please re-enter your reCAPTCHA.</div>';
+				echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Please re-enter your reCAPTCHA.</div>';
 				exit;
 			}
 		}else{
 			http_response_code(400);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Please enter your reCAPTCHA.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Please enter your reCAPTCHA.</div>';
 			exit;
 		}
 
@@ -198,10 +198,10 @@
 			}
 
 			http_response_code(200);
-			echo '<div class="alert alert-success fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Success!</strong> Your addon has been uploaded.</div><script type="text/javascript">window.setTimeout(function() {location.href="?show=addon&id='.$id.'";}, 2000);</script>';
+			echo '<div class="alert alert-success fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Success!</strong> Your addon has been uploaded.</div><script type="text/javascript">window.setTimeout(function() {location.href="?show=addon&id='.$id.'";}, 2000);</script>';
 		} else {
 			http_response_code(500);
-			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">Ã—</a><strong>Error!</strong> Something went wrong and we couldn\'t upload your addon.</div>';
+			echo '<div class="alert alert-danger fade in out"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a><strong>Error!</strong> Something went wrong and we couldn\'t upload your addon.</div>';
 		}
 	} else {
 		http_response_code(403);

@@ -19,7 +19,7 @@
 			<div class="form-group">
 				<label for="inputCaptcha" class="control-label">Captcha</label>
 				<div class="">
-					<div class="g-recaptcha" data-sitekey="*SITEKEYREMOVED*"></div>
+					<div class="g-recaptcha" data-sitekey="6Lf9hBETAAAAACYJnCC75GYoETGpJjp2-R13T-ms"></div>
 				</div>
 			</div>
 			<div class="form-group">
