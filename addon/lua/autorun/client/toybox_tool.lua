@@ -1,39 +1,39 @@
-CreateClientConVar("toybox_showurl", "1", true)
-CreateClientConVar("toybox_sizetype", "KB", true)
-CreateClientConVar("toybox_sizedecimals", "0", true)
-CreateConVar("toybox_allowweapons", "1", FCVAR_ARCHIVE+FCVAR_REPLICATED)
-CreateConVar("toybox_allowentities", "1", FCVAR_ARCHIVE+FCVAR_REPLICATED)
+CreateClientConVar("funbox_showurl", "1", true)
+CreateClientConVar("funbox_sizetype", "KB", true)
+CreateClientConVar("funbox_sizedecimals", "0", true)
+CreateConVar("funbox_allowweapons", "1", FCVAR_ARCHIVE+FCVAR_REPLICATED)
+CreateConVar("funbox_allowentities", "1", FCVAR_ARCHIVE+FCVAR_REPLICATED)
 
 local displayTypes = {{"Bytes", "B"}, {"Kilobytes", "KB"}, {"Megabytes", "MB"}, {"Gigabytes", "GB"}}
 
-local function ToyboxSettings(CPanel)
+local function funboxSettings(CPanel)
 	CPanel:AddControl("Header", {Description = "Client Settings"})
 
-	CPanel:AddControl("CheckBox", {Label = "Show URL bar", Command = "toybox_showurl"})
+	CPanel:AddControl("CheckBox", {Label = "Show URL bar", Command = "funbox_showurl"})
 
 	CPanel:AddControl("Header", {Description = "Shared Settings"})
 
-	CPanel:AddControl("CheckBox", {Label = "Allow weapons", Command = "toybox_allowweapons"})
+	CPanel:AddControl("CheckBox", {Label = "Allow weapons", Command = "funbox_allowweapons"})
 
-	CPanel:AddControl("CheckBox", {Label = "Allow entities", Command = "toybox_allowentities"})	
+	CPanel:AddControl("CheckBox", {Label = "Allow entities", Command = "funbox_allowentities"})	
 
 	CPanel:Button("Reload spawnmenu", "spawnmenu_reload")
 end
 
-local function ToyboxFormatSize(number)
+local function funboxFormatSize(number)
 	local i, j, minus, int, fraction = tostring(number):find('([-]?)(%d+)([.]?%d*)')
 	int = int:reverse():gsub("(%d%d%d)", "%1,")
 	return minus .. int:reverse():gsub("^,", "") .. fraction
 end
 
-local function ToyboxAddons(CPanel)
+local function funboxAddons(CPanel)
 	local displayTypesSingle = {}
 	for k,v in pairs(displayTypes) do
 		displayTypesSingle[k] = v[2]
 	end
 
-	if (!table.HasValue(displayTypesSingle, GetConVar("toybox_sizetype"):GetString())) then
-		GetConVar("toybox_sizetype"):SetString("KB")
+	if (!table.HasValue(displayTypesSingle, GetConVar("funbox_sizetype"):GetString())) then
+		GetConVar("funbox_sizetype"):SetString("KB")
 	end
 
 	CPanel:AddControl("Header", {Description = "Downloaded addons"})
@@ -47,7 +47,7 @@ local function ToyboxAddons(CPanel)
 	local num = 0
 	local opt = {}
 	function ctrl:UpdateValues()
-		format = GetConVar("toybox_sizetype"):GetString()
+		format = GetConVar("funbox_sizetype"):GetString()
 		num = (tonumber(table.KeyFromValue(displayTypesSingle, format))-1)
 
 		if (num <= 0) then
@@ -63,8 +63,8 @@ local function ToyboxAddons(CPanel)
 		end
 
 		opt = {}
-		for k,v in pairs(file.Find( "toybox/*.dat", "DATA" )) do
-			opt[v] = ToyboxFormatSize(math.Round(file.Size("toybox/"..v, "DATA")/num, GetConVar("toybox_sizedecimals"):GetInt()))..format
+		for k,v in pairs(file.Find( "funbox/*.dat", "DATA" )) do
+			opt[v] = funboxFormatSize(math.Round(file.Size("funbox/"..v, "DATA")/num, GetConVar("funbox_sizedecimals"):GetInt()))..format
 		end
 	end
 	ctrl:UpdateValues()
@@ -88,9 +88,9 @@ local function ToyboxAddons(CPanel)
 	local lstBox = vgui.Create("DComboBox")
 
 	//local displayTypesTmp = displayTypes
-	//table.RemoveByValue(displayTypesTmp, GetConVar("toybox_sizetype"):GetString())
+	//table.RemoveByValue(displayTypesTmp, GetConVar("funbox_sizetype"):GetString())
 	for k,v in pairs(displayTypes) do
-		if (GetConVar("toybox_sizetype"):GetString() == v[2]) then
+		if (GetConVar("funbox_sizetype"):GetString() == v[2]) then
 			lstBox:AddChoice(v[1], v[2], true)
 		else
 			lstBox:AddChoice(v[1], v[2])
@@ -98,14 +98,14 @@ local function ToyboxAddons(CPanel)
 	end
 
 	function lstBox:OnSelect(index, value, data)
-		GetConVar("toybox_sizetype"):SetString(data)
+		GetConVar("funbox_sizetype"):SetString(data)
 	end
 
 	CPanel:AddPanel(lstBox)
 
 
 
-	CPanel:AddControl("Slider", {Label = "No. of decimals", Command = "toybox_sizedecimals", Type="Integer",  Min = 0, Max = 4})	
+	CPanel:AddControl("Slider", {Label = "No. of decimals", Command = "funbox_sizedecimals", Type="Integer",  Min = 0, Max = 4})	
 
 
 
@@ -123,13 +123,13 @@ end
 
 
 local function PopulateUtilityMenus()
-	spawnmenu.AddToolMenuOption("Utilities", "Toybox", "ToyboxSettings", "Settings", "", "", ToyboxSettings)
-	spawnmenu.AddToolMenuOption("Utilities", "Toybox", "ToyboxAddons", "Addons", "", "", ToyboxAddons)
+	spawnmenu.AddToolMenuOption("Utilities", "funbox", "funboxSettings", "Settings", "", "", funboxSettings)
+	spawnmenu.AddToolMenuOption("Utilities", "funbox", "funboxAddons", "Addons", "", "", funboxAddons)
 end
-hook.Add("PopulateToolMenu", "ToyboxPopulateUtilityMenus", PopulateUtilityMenus)
+hook.Add("PopulateToolMenu", "funboxPopulateUtilityMenus", PopulateUtilityMenus)
 
 
 local function CreateUtilitiesCategories()
-	spawnmenu.AddToolCategory("Utilities", "Toybox", "Toybox")
+	spawnmenu.AddToolCategory("Utilities", "funbox", "funbox")
 end	
-hook.Add("AddToolMenuCategories", "ToyboxCreateUtilitiesCategories", CreateUtilitiesCategories)
+hook.Add("AddToolMenuCategories", "funboxCreateUtilitiesCategories", CreateUtilitiesCategories)

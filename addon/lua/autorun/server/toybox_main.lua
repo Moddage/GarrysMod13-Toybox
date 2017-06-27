@@ -1,24 +1,24 @@
-util.AddNetworkString("ToyboxLoadGMA")
-util.AddNetworkString("ToyboxSpawnWep")
-util.AddNetworkString("ToyboxSpawnEnt")
+util.AddNetworkString("funboxLoadGMA")
+util.AddNetworkString("funboxSpawnWep")
+util.AddNetworkString("funboxSpawnEnt")
 
-function ToyboxPrint(str)
+function funboxPrint(str)
 	if CLIENT then
-		chat.AddText(Color(64, 150, 238), "Toybox: ", Color(54, 57, 61), str)
+		chat.AddText(Color(64, 150, 238), "funbox: ", Color(54, 57, 61), str)
 	end
 end
 
-net.Receive("ToyboxLoadGMA", function(len, ply)
-	ToyboxLoadDat(net.ReadString())
+net.Receive("funboxLoadGMA", function(len, ply)
+	funboxLoadDat(net.ReadString())
 end)
 
-net.Receive("ToyboxSpawnWep", function(len, ply)
+net.Receive("funboxSpawnWep", function(len, ply)
 	local swep = net.ReadString()
 	ply:Give(swep)
 	ply:SelectWeapon(swep)
 end)
 
-net.Receive("ToyboxSpawnEnt", function(len, ply)
+net.Receive("funboxSpawnEnt", function(len, ply)
 local ent = net.ReadString()
 local spawnfunc
 local vStart = ply:EyePos()
@@ -46,42 +46,42 @@ end
 
 end)
 
-function ToyboxLoadDat(id)
+function funboxLoadDat(id)
 	//load .dat as gma
-	ToyboxPrint("Starting load of "..id..".dat as a gma")
+	funboxPrint("Starting load of "..id..".dat as a gma")
 
-	local success, tab = game.MountGMA("data/toybox/"..id..".dat")
+	local success, tab = game.MountGMA("data/funbox/"..id..".dat")
 
 	if success then
-		ToyboxPrint("Loaded "..id..".dat as a gma")
-		ToyboxParseAddonTable(tab)
+		funboxPrint("Loaded "..id..".dat as a gma")
+		funboxParseAddonTable(tab)
 	else
-		ToyboxPrint("Failed to load "..id..".dat as a gma")
+		funboxPrint("Failed to load "..id..".dat as a gma")
 	end
 end
 
-function ToyboxParseAddonTable(tab)
+function funboxParseAddonTable(tab)
 	for k,v in pairs(tab) do
 		local fileFolder = string.Split(v, "/")
 
 		if ((table.Count(fileFolder) >= 1) && (fileFolder[1] == "lua")) then
 			if ((table.Count(fileFolder) >= 2) && (fileFolder[2] == "weapons")) then
 				if ((table.Count(fileFolder) >= 3) && (string.EndsWith(fileFolder[3], ".lua"))) then
-					ToyboxLoadSWEP(fileFolder[3])
+					funboxLoadSWEP(fileFolder[3])
 				end
 			end
 
 			if ((table.Count(fileFolder) >= 2) && (fileFolder[2] == "entities")) then
 				if ((table.Count(fileFolder) >= 3) && (string.EndsWith(fileFolder[3], ".lua"))) then
-					ToyboxLoadENT(fileFolder[3])
+					funboxLoadENT(fileFolder[3])
 				end
 			end
 		end
 	end
 end
 
-function ToyboxLoadSWEP(filename)
-	if (GetConVar("toybox_allowweapons"):GetBool() == false) then return end
+function funboxLoadSWEP(filename)
+	if (GetConVar("funbox_allowweapons"):GetBool() == false) then return end
 	local wep = ""
 	if(string.EndsWith(filename, ".lua")) then
 		wep = string.sub(filename, 1, string.len(filename)-4)
@@ -100,8 +100,8 @@ function ToyboxLoadSWEP(filename)
 	SWEP = nil
 end
 
-function ToyboxLoadENT(filename)
-	if (GetConVar("toybox_allowentities"):GetBool() == false) then return end
+function funboxLoadENT(filename)
+	if (GetConVar("funbox_allowentities"):GetBool() == false) then return end
 	local sent = ""
 	if(string.EndsWith(filename, ".lua")) then
 		sent = string.sub(filename, 1, string.len(filename)-4)
