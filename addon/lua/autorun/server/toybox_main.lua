@@ -46,11 +46,46 @@ end
 
 end)
 
+local function funboxCheckForGma(id)
+	if game.GetWorld():GetTable().FunboxGMADownloads == nil then
+	local FunboxGMADownloads={}
+    game.GetWorld():GetTable().FunboxGMADownloads = {"empty"}
+	end
+	if game.GetWorld():GetTable().FunboxGMADownloadsFiles == nil then
+	local FunboxGMADownloadsFiles={}
+    game.GetWorld():GetTable().FunboxGMADownloadsFiles = {"empty"}
+	end
+	local isgmafound
+	for i=1, #game.GetWorld():GetTable().FunboxGMADownloads, 1 do
+    if game.GetWorld():GetTable().FunboxGMADownloads[i] == id then
+	isgmafound = true
+	end
+	end
+	if !isgmafound then
+	table.insert(game.GetWorld():GetTable().FunboxGMADownloads,id)
+	return false
+	else
+    return true
+	end
+end
+
+local function funboxGetAddonFiles(tab,id)
+	tab = game.GetWorld():GetTable().FunboxGMADownloadsFiles[tonumber(id)]
+	return tab
+end
+
 function funboxLoadDat(id)
 	//load .dat as gma
+	if funboxCheckForGma(id) then
+	local tab
+	tab = funboxGetAddonFiles(tab,id)
+	funboxParseAddonTable(tab)
+	return
+	end
 	funboxPrint("Starting load of "..id..".dat as a gma")
 
 	local success, tab = game.MountGMA("data/funbox/"..id..".dat")
+	table.insert(game.GetWorld():GetTable().FunboxGMADownloadsFiles,id,tab)
 
 	if success then
 		funboxPrint("Loaded "..id..".dat as a gma")
