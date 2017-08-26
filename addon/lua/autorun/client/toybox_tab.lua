@@ -4,7 +4,7 @@ local PANEL = {}
    Name: Init
 ---------------------------------------------------------*/
 function PANEL:Init()
-	if (GetConVar("funbox_showurl"):GetBool() == true) then
+	if (GetConVar("Toybox_showurl"):GetBool() == true) then
 		self.HTMLControls = vgui.Create("DHTMLControls", self);
 		self.HTMLControls:Dock(TOP)
 	end
@@ -14,14 +14,14 @@ function PANEL:Paint()
 	if (!self.Started) then
 		self.Started = true;
 
-		local homeURL = "http://funbox.lethal-direct.com/ingame/"
+		local homeURL = "http://funbox.website/ingame/"
 		
 		self.HTML = vgui.Create("DHTML", self)
 		self.HTML:Dock(FILL)
 		self.HTML:OpenURL(homeURL)
 		self.HTML:SetAllowLua(true)
 		
-		if (GetConVar("funbox_showurl"):GetBool() == true) then
+		if (GetConVar("Toybox_showurl"):GetBool() == true) then
 			self.HTMLControls:SetHTML(self.HTML)
 			self.HTMLControls.AddressBar:SetText(homeURL)
 			self.HTMLControls.HomeURL = homeURL
@@ -47,4 +47,4 @@ local function CreateContentPanel()
 	return ctrl
 end
 
-spawnmenu.AddCreationTab("Funbox", CreateContentPanel, "icon16/weather_clouds.png", 1000)
+spawnmenu.AddCreationTab("Toybox", CreateContentPanel, "icon16/weather_clouds.png", 1000)
