@@ -19,53 +19,55 @@ net.Receive("ToyboxSpawnWep", function(len, ply)
 end)
 
 net.Receive("ToyboxSpawnEnt", function(len, ply)
-local ent = net.ReadString()
-local spawnfunc
-local vStart = ply:EyePos()
-local vForward = ply:GetAimVector()
-    local trace = {}
-trace.start = vStart
-trace.endpos = vStart + ( vForward * 4096 )
-trace.filter = ply
+	local ent = net.ReadString()
+	local spawnfunc
+	local vStart = ply:EyePos()
+	local vForward = ply:GetAimVector()
+	local trace = {}
+	trace.start = vStart
+	trace.endpos = vStart + ( vForward * 4096 )
+	trace.filter = ply
 
-tr = util.TraceLine( trace )
-local sent = scripted_ents.GetStored( EntityName )
-local SpawnFunction = scripted_ents.GetMember( ent, "SpawnFunction" )
-if ( !SpawnFunction ) then return end
+	tr = util.TraceLine( trace )
+	local sent = scripted_ents.GetStored( EntityName )
+	local SpawnFunction = scripted_ents.GetMember( ent, "SpawnFunction" )
+	if ( !SpawnFunction ) then return end
 
-    spawnfunc = SpawnFunction( sent, ply, tr, ent )
-undo.Create( spawnfunc.PrintName )
-    undo.AddEntity( spawnfunc )
-    undo.SetPlayer( ply )
-    undo.SetCustomUndoText( "Undone " .. spawnfunc.PrintName)
-    undo.Finish()
-if ( IsValid( spawnfunc ) ) then
-spawnfunc:SetCreator( ply )
-end
+	spawnfunc = SpawnFunction( sent, ply, tr, ent )
+	undo.Create( spawnfunc.PrintName )
+		undo.AddEntity( spawnfunc )
+		undo.SetPlayer( ply )
+		undo.SetCustomUndoText( "Undone " .. spawnfunc.PrintName)
+	undo.Finish()
 
-
+	if ( IsValid( spawnfunc ) ) then
+		spawnfunc:SetCreator( ply )
+	end
 end)
 
 local function ToyboxCheckForGma(id)
 	if game.GetWorld():GetTable().ToyboxGMADownloads == nil then
-	local ToyboxGMADownloads={}
-    game.GetWorld():GetTable().ToyboxGMADownloads = {"empty"}
+		local ToyboxGMADownloads={}
+		game.GetWorld():GetTable().ToyboxGMADownloads = {"empty"}
 	end
+
 	if game.GetWorld():GetTable().ToyboxGMADownloadsFiles == nil then
-	local ToyboxGMADownloadsFiles={}
-    game.GetWorld():GetTable().ToyboxGMADownloadsFiles = {"empty"}
+		local ToyboxGMADownloadsFiles={}
+		game.GetWorld():GetTable().ToyboxGMADownloadsFiles = {"empty"}
 	end
+
 	local isgmafound
 	for i=1, #game.GetWorld():GetTable().ToyboxGMADownloads, 1 do
-    if game.GetWorld():GetTable().ToyboxGMADownloads[i] == id then
-	isgmafound = true
-	end
+		if game.GetWorld():GetTable().ToyboxGMADownloads[i] == id then
+			isgmafound = true
+			break
+		end
 	end
 	if !isgmafound then
-	table.insert(game.GetWorld():GetTable().ToyboxGMADownloads,id)
-	return false
+		table.insert(game.GetWorld():GetTable().ToyboxGMADownloads,id)
+		return false
 	else
-    return true
+		return true
 	end
 end
 
@@ -84,7 +86,7 @@ function ToyboxLoadDat(id)
 	end
 	ToyboxPrint("Starting load of "..id..".dat as a gma")
 
-	local success, tab = game.MountGMA("data/Toybox/"..id..".dat")
+	local success, tab = game.MountGMA("data/toybox/"..id..".dat")
 	
 
 	if success then
@@ -117,7 +119,7 @@ function ToyboxParseAddonTable(tab)
 end
 
 function ToyboxLoadSWEP(filename)
-	if (GetConVar("Toybox_allowweapons"):GetBool() == false) then return end
+	if (GetConVar("toybox_allowweapons"):GetBool() == false) then return end
 	local wep = ""
 	if(string.EndsWith(filename, ".lua")) then
 		wep = string.sub(filename, 1, string.len(filename)-4)
@@ -137,7 +139,7 @@ function ToyboxLoadSWEP(filename)
 end
 
 function ToyboxLoadENT(filename)
-	if (GetConVar("Toybox_allowentities"):GetBool() == false) then return end
+	if (GetConVar("toybox_allowentities"):GetBool() == false) then return end
 	local sent = ""
 	if(string.EndsWith(filename, ".lua")) then
 		sent = string.sub(filename, 1, string.len(filename)-4)

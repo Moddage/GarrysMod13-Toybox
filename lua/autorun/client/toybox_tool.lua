@@ -1,24 +1,24 @@
-CreateClientConVar("Toybox_showurl", "1", true)
-CreateClientConVar("Toybox_sizetype", "KB", true)
-CreateClientConVar("Toybox_sizedecimals", "0", true)
-CreateClientConVar("Toybox_key", "", true)
-CreateConVar("Toybox_allowweapons", "1", FCVAR_ARCHIVE+FCVAR_REPLICATED)
-CreateConVar("Toybox_allowentities", "1", FCVAR_ARCHIVE+FCVAR_REPLICATED)
+CreateClientConVar("toybox_showurl", "1", true)
+CreateClientConVar("toybox_sizetype", "KB", true)
+CreateClientConVar("toybox_sizedecimals", "0", true)
+CreateClientConVar("toybox_key", "", true)
+CreateConVar("toybox_allowweapons", "1", FCVAR_ARCHIVE+FCVAR_REPLICATED)
+CreateConVar("toybox_allowentities", "1", FCVAR_ARCHIVE+FCVAR_REPLICATED)
 
 local displayTypes = {{"Bytes", "B"}, {"Kilobytes", "KB"}, {"Megabytes", "MB"}, {"Gigabytes", "GB"}}
 
 local function ToyboxSettings(CPanel)
 	CPanel:AddControl("Header", {Description = "Client Settings"})
 
-	CPanel:AddControl("CheckBox", {Label = "Show URL bar", Command = "Toybox_showurl"})
+	CPanel:AddControl("CheckBox", {Label = "Show URL bar", Command = "toybox_showurl"})
 
 	CPanel:AddControl("Header", {Description = "Shared Settings"})
 
-	CPanel:AddControl("CheckBox", {Label = "Allow weapons", Command = "Toybox_allowweapons"})
+	CPanel:AddControl("CheckBox", {Label = "Allow weapons", Command = "toybox_allowweapons"})
 
-	CPanel:AddControl("CheckBox", {Label = "Allow entities", Command = "Toybox_allowentities"})	
+	CPanel:AddControl("CheckBox", {Label = "Allow entities", Command = "toybox_allowentities"})	
 
-    CPanel:AddControl("TextBox", {Label = "Toybox key", Command = "Toybox_key", Type="String",  Min = 0, Max = 32})
+	CPanel:AddControl("TextBox", {Label = "Toybox key", Command = "toybox_key", Type="String",  Min = 0, Max = 32})
 
 	CPanel:Button("Reload spawnmenu", "spawnmenu_reload")
 end
@@ -35,8 +35,8 @@ local function ToyboxAddons(CPanel)
 		displayTypesSingle[k] = v[2]
 	end
 
-	if (!table.HasValue(displayTypesSingle, GetConVar("Toybox_sizetype"):GetString())) then
-		GetConVar("Toybox_sizetype"):SetString("KB")
+	if (!table.HasValue(displayTypesSingle, GetConVar("toybox_sizetype"):GetString())) then
+		GetConVar("toybox_sizetype"):SetString("KB")
 	end
 
 	CPanel:AddControl("Header", {Description = "Downloaded addons"})
@@ -50,7 +50,7 @@ local function ToyboxAddons(CPanel)
 	local num = 0
 	local opt = {}
 	function ctrl:UpdateValues()
-		format = GetConVar("Toybox_sizetype"):GetString()
+		format = GetConVar("toybox_sizetype"):GetString()
 		num = (tonumber(table.KeyFromValue(displayTypesSingle, format))-1)
 
 		if (num <= 0) then
@@ -66,8 +66,8 @@ local function ToyboxAddons(CPanel)
 		end
 
 		opt = {}
-		for k,v in pairs(file.Find( "Toybox/*.dat", "DATA" )) do
-			opt[v] = ToyboxFormatSize(math.Round(file.Size("Toybox/"..v, "DATA")/num, GetConVar("Toybox_sizedecimals"):GetInt()))..format
+		for k,v in pairs(file.Find( "toybox/*.dat", "DATA" )) do
+			opt[v] = ToyboxFormatSize(math.Round(file.Size("toybox/"..v, "DATA")/num, GetConVar("toybox_sizedecimals"):GetInt()))..format
 		end
 	end
 	ctrl:UpdateValues()
@@ -85,15 +85,13 @@ local function ToyboxAddons(CPanel)
 	
 	ctrl:SetTall("300")
 	CPanel:AddPanel(ctrl)
-
-
-
+	
 	local lstBox = vgui.Create("DComboBox")
 
 	//local displayTypesTmp = displayTypes
-	//table.RemoveByValue(displayTypesTmp, GetConVar("Toybox_sizetype"):GetString())
+	//table.RemoveByValue(displayTypesTmp, GetConVar("toybox_sizetype"):GetString())
 	for k,v in pairs(displayTypes) do
-		if (GetConVar("Toybox_sizetype"):GetString() == v[2]) then
+		if (GetConVar("toybox_sizetype"):GetString() == v[2]) then
 			lstBox:AddChoice(v[1], v[2], true)
 		else
 			lstBox:AddChoice(v[1], v[2])
@@ -101,16 +99,12 @@ local function ToyboxAddons(CPanel)
 	end
 
 	function lstBox:OnSelect(index, value, data)
-		GetConVar("Toybox_sizetype"):SetString(data)
+		GetConVar("toybox_sizetype"):SetString(data)
 	end
 
 	CPanel:AddPanel(lstBox)
 
-
-
-	CPanel:AddControl("Slider", {Label = "No. of decimals", Command = "Toybox_sizedecimals", Type="Integer",  Min = 0, Max = 4})	
-
-
+	CPanel:AddControl("Slider", {Label = "No. of decimals", Command = "toybox_sizedecimals", Type="Integer",  Min = 0, Max = 4})	
 
 	local btnRefresh = vgui.Create("DButton")
 	btnRefresh:SetText("Refresh list")

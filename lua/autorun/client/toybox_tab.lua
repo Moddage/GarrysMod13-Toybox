@@ -4,7 +4,7 @@ local PANEL = {}
    Name: Init
 ---------------------------------------------------------*/
 function PANEL:Init()
-	if (GetConVar("Toybox_showurl"):GetBool() == true) then
+	if (GetConVar("toybox_showurl"):GetBool() == true) then
 		self.HTMLControls = vgui.Create("DHTMLControls", self);
 		self.HTMLControls:Dock(TOP)
 	end
@@ -21,7 +21,7 @@ function PANEL:Paint()
 		self.HTML:OpenURL(homeURL)
 		self.HTML:SetAllowLua(true)
 		
-		if (GetConVar("Toybox_showurl"):GetBool() == true) then
+		if (GetConVar("toybox_showurl"):GetBool() == true) then
 			self.HTMLControls:SetHTML(self.HTML)
 			self.HTMLControls.AddressBar:SetText(homeURL)
 			self.HTMLControls.HomeURL = homeURL

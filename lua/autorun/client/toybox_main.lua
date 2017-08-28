@@ -27,11 +27,8 @@ function ToyboxPrint(...)
 end
 
 function ToyboxDownload(id, user, name)
-	print(id)
-	print(user)
-	print(name)
 	//Check for addon existing
-	if (file.Exists("Toybox/"..id..".dat", "DATA")) then
+	if (file.Exists("toybox/"..id..".dat", "DATA")) then
 		ToyboxPrint("Allready downloaded addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
 		ToyboxPreLoadDat(id)
 	else
@@ -50,7 +47,7 @@ function ToyboxDownloadHttp(id, user, name)
 				if (file.Exists("Toybox", "DATA") == false) then
 					file.CreateDir("Toybox")
 				end
-				file.Write("Toybox/"..id..".dat", body)
+				file.Write("toybox/"..id..".dat", body)
 
 				ToyboxPrint("Saved addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor, " as "..id..".dat")
 
@@ -78,24 +75,27 @@ end
 
 local function ToyboxCheckForGma(id)
 	if game.GetWorld():GetTable().ToyboxGMADownloads == nil then
-	local ToyboxGMADownloads={}
-        game.GetWorld():GetTable().ToyboxGMADownloads = {"empty"}
+		local ToyboxGMADownloads={}
+		game.GetWorld():GetTable().ToyboxGMADownloads = {"empty"}
 	end
+
 	if game.GetWorld():GetTable().ToyboxGMADownloadsFiles == nil then
-	local ToyboxGMADownloadsFiles={}
-        game.GetWorld():GetTable().ToyboxGMADownloadsFiles = {"empty"}
+		local ToyboxGMADownloadsFiles={}
+		game.GetWorld():GetTable().ToyboxGMADownloadsFiles = {"empty"}
 	end
+
 	local isgmafound
 	for i=1, #game.GetWorld():GetTable().ToyboxGMADownloads, 1 do
-        if game.GetWorld():GetTable().ToyboxGMADownloads[i] == id then
-	isgmafound = true
-	end
+		if game.GetWorld():GetTable().ToyboxGMADownloads[i] == id then
+			isgmafound = true
+			break
+		end
 	end
 	if !isgmafound then
-	table.insert(game.GetWorld():GetTable().ToyboxGMADownloads,id)
-	return false
+		table.insert(game.GetWorld():GetTable().ToyboxGMADownloads,id)
+		return false
 	else
-        return true
+		return true
 	end
 end
 
@@ -107,14 +107,14 @@ end
 function ToyboxLoadDat(id)
 	//load .dat as gma
 	if ToyboxCheckForGma(id) then
-	local tab
-	tab = ToyboxGetAddonFiles(tab,id)
-	ToyboxParseAddonTable(tab)
-	return
+		local tab
+		tab = ToyboxGetAddonFiles(tab,id)
+		ToyboxParseAddonTable(tab)
+		return
 	end
 	ToyboxPrint("Starting load of ", HighlightColor, id..".dat", MainColor, " as a gma")
 
-	local success, tab = game.MountGMA("data/Toybox/"..id..".dat")
+	local success, tab = game.MountGMA("data/toybox/"..id..".dat")
 	table.insert(game.GetWorld():GetTable().ToyboxGMADownloadsFiles,id,tab)
 
 	if success then
@@ -147,7 +147,7 @@ function ToyboxParseAddonTable(tab)
 end
 
 function ToyboxLoadSWEP(filename)
-	if (GetConVar("Toybox_allowweapons"):GetBool() == false) then return end
+	if (GetConVar("toybox_allowweapons"):GetBool() == false) then return end
 	local wep = ""
 	if(string.EndsWith(filename, ".lua")) then
 		wep = string.sub(filename, 1, string.len(filename)-4)
@@ -163,9 +163,7 @@ function ToyboxLoadSWEP(filename)
 	
 	weapons.Register(SWEP, wep)
 
-	SWEP = nil
-
-	
+	SWEP = nil	
 
 	net.Start("ToyboxSpawnWep")
 		net.WriteString(wep)
@@ -173,7 +171,7 @@ function ToyboxLoadSWEP(filename)
 end
 
 function ToyboxLoadENT(filename)
-	if (GetConVar("Toybox_allowentities"):GetBool() == false) then return end
+	if (GetConVar("toybox_allowentities"):GetBool() == false) then return end
 	local sent = ""
 	if(string.EndsWith(filename, ".lua")) then
 		sent = string.sub(filename, 1, string.len(filename)-4)
@@ -187,9 +185,7 @@ function ToyboxLoadENT(filename)
 	
 	scripted_ents.Register(ENT, sent)
 
-	ENT = nil
-
-	
+	ENT = nil	
 
 	net.Start("ToyboxSpawnEnt")
 		net.WriteString(sent)
