@@ -14,11 +14,11 @@ function PANEL:Paint()
 	if (!self.Started) then
 		self.Started = true;
 
-		local homeURL = "https://toybox.rtm516.co.uk/api/keyLogin.php?key=" + GetConVar("toybox_showurl"):GetString()
+		local homeURL = "https://toybox.rtm516.co.uk/"
 		
 		self.HTML = vgui.Create("DHTML", self)
 		self.HTML:Dock(FILL)
-		self.HTML:OpenURL(homeURL)
+		self.HTML:OpenURL("https://toybox.rtm516.co.uk/api/keyLogin.php?key="..GetConVar("toybox_key"):GetString())
 		self.HTML:SetAllowLua(true)
 		
 		if (GetConVar("toybox_showurl"):GetBool() == true) then
@@ -26,14 +26,14 @@ function PANEL:Paint()
 			self.HTMLControls.AddressBar:SetText(homeURL)
 			self.HTMLControls.HomeURL = homeURL
 			local HTMLControls = self.HTMLControls
-
-			function self.HTML:OnBeginLoadingDocument(url)
-				HTMLControls.AddressBar:SetText(url)
-			end
 		end
 
 		function self.HTML:OnDocumentReady(url)
-			self:Call("ingame = true;")
+			self:Call("isIngame();")
+		end
+
+		function self.HTML:ConsoleMessage(msg)
+			print(msg)
 		end
 		
 		self:InvalidateLayout()
