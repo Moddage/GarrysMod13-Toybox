@@ -43,7 +43,7 @@ function ToyboxDownload(id, user, name)
 end
 
 function ToyboxDownloadHttp(id, user, name)
-	http.Fetch("http://funbox.website/client/download.php?id="..id,
+	http.Fetch("http://toybox.rtm516.co.uk/api/download.php?id="..id,
 		function(body, len, headers, code)
 			if (body ~= "Unknown addon") then
 				ToyboxPrint("Downloaded addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
