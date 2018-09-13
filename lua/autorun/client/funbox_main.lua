@@ -2,10 +2,11 @@ local PrefixColor = Color(64, 150, 238)
 local MainColor = Color(54, 57, 61)
 local ErrorColor = Color(255, 0, 0)
 local HighlightColor = Color(230, 126, 34)
+local printtext = CreateClientConVar("funbox_print_text", "0", true)
 
 function FunboxPrint(...)
-	if CLIENT then
-	--[[	local vargs = {...}
+	if CLIENT and printtext:GetBool() then
+		local vargs = {...}
 
 		local cmdStr = 'chat.AddText(Color('..PrefixColor.r..', '..PrefixColor.g..', '..PrefixColor.b..', '..PrefixColor.a..'), "Funbox: ", Color('..MainColor.r..', '..MainColor.g..', '..MainColor.b..', '..MainColor.a..'), '
 		for k,v in pairs(vargs) do
@@ -22,7 +23,7 @@ function FunboxPrint(...)
 		end
 		cmdStr = cmdStr..")"
 
-		RunString(cmdStr)]]
+		RunString(cmdStr)
 	end
 end
 
@@ -32,36 +33,37 @@ function FunboxDownload(id, user, name)
 	print(name)
 	//Check for addon existing
 	if (file.Exists("Funbox/"..id..".dat", "DATA")) then
-	--	FunboxPrint("Allready downloaded addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
+		FunboxPrint("Allready downloaded addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
 		FunboxPreLoadDat(id)
 	else
 		//Show a gui here
-
-	--	FunboxPrint("Attempting to download addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
+		notification.AddProgress("funbox_Downloading", "Downloading...")
+		FunboxPrint("Attempting to download addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
 		FunboxDownloadHttp(id, user, name)
 	end
 end
 
 function FunboxDownloadHttp(id, user, name)
-	http.Fetch("https://lethaldirect.site.nfoservers.com/client/download.php?id="..id,
+	http.Fetch("https://funbox.moddage.site/client/download.php?id="..id,
 		function(body, len, headers, code)
 			if (body ~= "Unknown addon") then
-		--		FunboxPrint("Downloaded addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
+				FunboxPrint("Downloaded addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
 				if (file.Exists("Funbox", "DATA") == false) then
 					file.CreateDir("Funbox")
 				end
 				file.Write("Funbox/"..id..".dat", body)
 
-		--		FunboxPrint("Saved addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor, " as "..id..".dat")
-
+				FunboxPrint("Saved addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor, " as "..id..".dat")
+				notification.Kill("funbox_Downloading")
 				FunboxPreLoadDat(id)
 			else
-		--		FunboxPrint(ErrorColor, "Error: ", MainColor, "No addon file")
+				FunboxPrint(ErrorColor, "Error: ", MainColor, "No addon file")
+				notification.Kill("funbox_Downloading")
 			end
 		end,
 		function(error)
-			--FunboxPrint(ErrorColor, "Error: ", MainColor, "Download for addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor, " failed ("..error..")")
-		--	FunboxPrint("Retrying the download for ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
+			FunboxPrint(ErrorColor, "Error: ", MainColor, "Download for addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor, " failed ("..error..")")
+			FunboxPrint("Retrying the download for ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
 			FunboxDownloadHttp(id, user, name)
 		end
 	)
@@ -112,17 +114,17 @@ function FunboxLoadDat(id)
 	FunboxParseAddonTable(tab)
 	return
 	end
-	--FunboxPrint("Starting load of ", HighlightColor, id..".dat", MainColor, " as a gma")
+	FunboxPrint("Starting load of ", HighlightColor, id..".dat", MainColor, " as a gma")
 
 	local success, tab = game.MountGMA("data/Funbox/"..id..".dat")
 	table.insert(game.GetWorld():GetTable().FunboxGMADownloadsFiles,id,tab)
 
 	if success then
-	--	FunboxPrint("Loaded ", HighlightColor, id..".dat", MainColor, " as a gma")
+		FunboxPrint("Loaded ", HighlightColor, id..".dat", MainColor, " as a gma")
 		FunboxParseAddonTable(tab)
 		--RunConsoleCommand("spawnmenu_reload")
 	else
-	--	FunboxPrint("Failed to load ", HighlightColor, id..".dat", MainColor, " as a gma")
+		FunboxPrint("Failed to load ", HighlightColor, id..".dat", MainColor, " as a gma")
 	end
 end
 
@@ -130,7 +132,6 @@ function FunboxParseAddonTable(tab)
 	print("parsing")
 	for k,v in pairs(tab) do
 		local fileFolder = string.Split(v, "/")
-
 		if ((table.Count(fileFolder) >= 1) && (fileFolder[1] == "lua")) then
 			if ((table.Count(fileFolder) >= 2) && (fileFolder[2] == "weapons")) then
 				if ((table.Count(fileFolder) >= 3) && (string.EndsWith(fileFolder[3], ".lua"))) then

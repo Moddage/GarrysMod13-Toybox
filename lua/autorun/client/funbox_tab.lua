@@ -8,13 +8,17 @@ function PANEL:Init()
 		self.HTMLControls = vgui.Create("DHTMLControls", self);
 		self.HTMLControls:Dock(TOP)
 	end
+
+	concommand.Add("Funbox_search", function(_,_,arg)
+		self.HTML:RunJavascript('document.getElementById("srch-term").value = "'..arg[1]..'";')
+	end)
 end
 
 function PANEL:Paint()
 	if (!self.Started) then
 		self.Started = true;
 
-		local homeURL = "http://lethaldirect.site.nfoservers.com/ingame/"
+		local homeURL = "https://funbox.moddage.site/ingame/"
 		
 		self.HTML = vgui.Create("DHTML", self)
 		self.HTML:Dock(FILL)
