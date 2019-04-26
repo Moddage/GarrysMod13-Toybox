@@ -1,3 +1,5 @@
+if !game.SinglePlayer() then return end
+
 local PrefixColor = Color(64, 150, 238)
 local MainColor = Color(54, 57, 61)
 local ErrorColor = Color(255, 0, 0)
@@ -27,26 +29,78 @@ function FunboxPrint(...)
 	end
 end
 
-function FunboxDownload(id, user, name)
-	print(id)
-	print(user)
-	print(name)
+function FunboxDownload(id, user, name, date)
+	print(date, "date")
+	if !id then
+		notification.AddLegacy("INVALID ID! How did you even do this?!", NOTIFY_ERROR, 3)
+		return
+	end
+
 	//Check for addon existing
 	if (file.Exists("Funbox/"..id..".dat", "DATA")) then
-		FunboxPrint("Allready downloaded addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
-		FunboxPreLoadDat(id)
+		local time = date or "2019-04-10 00:20:03"
+		local montht = string.sub(time, 6, 7)
+		local dayt = string.sub(time, 9, 10)
+		local yeart = string.sub(time, 1, 4)
+		local hourt = string.sub(time, 12, 13)
+		local minutet = string.sub(time, 15, 16)
+		local secondt = string.sub(time, 18, 19)
+		local unix = os.time{year=yeart, month=montht, day=dayt, hour=hourt, min=minutet, sec=secondt} -- there HAS to be a better way to this.
+		local localtime = file.Time("Funbox/"..id..".dat", "DATA")
+		local osdiff = os.difftime(localtime, unix)
+		print(osdiff)
+		if osdiff > 0 or unix == 1554880803 or time == "2019-04-10 00:31:03" then
+			FunboxPrint("Already downloaded addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
+			FunboxPreLoadDat(id, true)
+		else
+			notification.AddProgress("funbox_Downloading", "Updating...")
+			FunboxPrint("Attempting to update ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
+			FunboxDownloadHttp(id, user, name, true)
+		end
+	elseif (file.Exists("Funbox/Saves/"..id..".dat", "DATA")) then
+		local map = string.sub(file.Read("funbox/saves/"..id..".dat", "DATA"), 5, #game.GetMap() + 5)
+		--[[print(map)
+		print(map == "gm_construct")
+		local maps = file.Find("maps/*.bsp", "GAME")
+		local maps2 = {}
+		for k, v in pairs(maps) do
+			maps2[v] = true
+		end
+		--PrintTable(maps2)
+		if map == game.GetMap() then	]]	
+		FunboxPrint("Already downloaded save ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
+		RunConsoleCommand("gm_load", "data/funbox/saves/"..id..".dat")
+		--[[else
+			--FunboxPrint("Save ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor, " uses ", HighlightColor, map, MainColor, "!")
+			surface.PlaySound("buttons/button8.wav")
+			notification.AddLegacy("\""..name.."\" uses map \""..map.."\", but you are using \""..game.GetMap().."\"!", NOTIFY_ERROR, 3)
+		end]]
 	else
 		//Show a gui here
 		notification.AddProgress("funbox_Downloading", "Downloading...")
-		FunboxPrint("Attempting to download addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
+		FunboxPrint("Attempting to download ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
 		FunboxDownloadHttp(id, user, name)
 	end
 end
 
-function FunboxDownloadHttp(id, user, name)
+function FunboxDownloadHttp(id, user, name, update)
 	http.Fetch("https://funbox.moddage.site/client/download.php?id="..id,
 		function(body, len, headers, code)
+			print(body, len, headers, code)
 			if (body ~= "Unknown addon") then
+				if (string.sub(body, 1, 3) == "GMS") then
+					if (file.Exists("Funbox", "DATA") == false) then
+						file.CreateDir("Funbox")
+					end
+					if (file.Exists("Funbox/Saves", "DATA") == false) then
+						file.CreateDir("Funbox/Saves")
+					end
+					file.Write("Funbox/Saves/"..id..".dat", body)
+					RunConsoleCommand("gm_load", "data/funbox/saves/"..id..".dat")
+					FunboxPrint("Downloaded save ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
+					notification.Kill("funbox_Downloading")
+					return
+				end
 				FunboxPrint("Downloaded addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
 				if (file.Exists("Funbox", "DATA") == false) then
 					file.CreateDir("Funbox")
@@ -60,22 +114,33 @@ function FunboxDownloadHttp(id, user, name)
 				FunboxPrint(ErrorColor, "Error: ", MainColor, "No addon file")
 				notification.Kill("funbox_Downloading")
 			end
+
+			if update then
+				notification.Kill("funbox_Downloading")
+				surface.PlaySound("buttons/button1.wav")
+				notification.AddLegacy("If you have already mounted "..name..", restart your game and select it again!", NOTIFY_GENERIC, 10)
+			end
 		end,
 		function(error)
 			FunboxPrint(ErrorColor, "Error: ", MainColor, "Download for addon ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor, " failed ("..error..")")
 			FunboxPrint("Retrying the download for ", HighlightColor, name, MainColor, " by ", HighlightColor, user, MainColor)
 			FunboxDownloadHttp(id, user, name)
+			notification.Kill("funbox_Downloading")
 		end
 	)
 end
 
-function FunboxPreLoadDat(id)
+function FunboxPreLoadDat(id, alreadyd)
 	net.Start("FunboxLoadGMA")
 		net.WriteString(id)
 	net.SendToServer()
-	timer.Simple(1, function()
+	if alreadyd then
 		FunboxLoadDat(id)
-	end)	
+	else
+		timer.Simple(1, function()
+			FunboxLoadDat(id)
+		end)	
+	end
 end
 
 local function FunboxCheckForGma(id)
@@ -132,6 +197,7 @@ function FunboxParseAddonTable(tab)
 	print("parsing")
 	for k,v in pairs(tab) do
 		local fileFolder = string.Split(v, "/")
+		print(fileFolder[1], "folder")
 		if ((table.Count(fileFolder) >= 1) && (fileFolder[1] == "lua")) then
 			if ((table.Count(fileFolder) >= 2) && (fileFolder[2] == "weapons")) then
 				if ((table.Count(fileFolder) >= 3) && (string.EndsWith(fileFolder[3], ".lua"))) then
@@ -150,6 +216,12 @@ function FunboxParseAddonTable(tab)
 				if ((table.Count(fileFolder) >= 3) && (string.EndsWith(fileFolder[3], ".mdl"))) then
 					FunboxLoadPROP(fileFolder[3], fileFolder[2])
 				end
+			elseif string.find(v, ".mdl") then -- last chance measure
+				RunConsoleCommand("gm_spawn", v)
+			end
+		elseif ((table.Count(fileFolder) >= 1) && (fileFolder[1] == "maps")) then
+			if ((table.Count(fileFolder) >= 2) && (string.EndsWith(fileFolder[2], ".bsp"))) then
+				RunConsoleCommand("changelevel", string.Replace(fileFolder[2], ".bsp", ""))
 			end
 		end
 	end

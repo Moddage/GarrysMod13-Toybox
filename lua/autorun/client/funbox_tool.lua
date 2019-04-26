@@ -1,6 +1,8 @@
+if !game.SinglePlayer() then return end
+
 CreateClientConVar("Funbox_showurl", "1", true)
-CreateClientConVar("Funbox_sizetype", "KB", true)
-CreateClientConVar("Funbox_sizedecimals", "0", true)
+CreateClientConVar("Funbox_sizetype", "MB", true)
+CreateClientConVar("Funbox_sizedecimals", "4", true)
 CreateClientConVar("Funbox_key", "", true)
 CreateConVar("Funbox_allowweapons", "1", FCVAR_ARCHIVE+FCVAR_REPLICATED)
 CreateConVar("Funbox_allowentities", "1", FCVAR_ARCHIVE+FCVAR_REPLICATED)
@@ -70,6 +72,10 @@ local function FunboxAddons(CPanel)
 		for k,v in pairs(file.Find( "Funbox/*.dat", "DATA" )) do
 			opt[v] = FunboxFormatSize(math.Round(file.Size("Funbox/"..v, "DATA")/num, GetConVar("Funbox_sizedecimals"):GetInt()))..format
 		end
+
+		for k,v in pairs(file.Find( "Funbox/Saves/*.dat", "DATA" )) do
+			opt[v] = FunboxFormatSize(math.Round(file.Size("Funbox/"..v, "DATA")/num, GetConVar("Funbox_sizedecimals"):GetInt()))..format
+		end
 	end
 	ctrl:UpdateValues()
 
@@ -111,7 +117,20 @@ local function FunboxAddons(CPanel)
 
 	CPanel:AddControl("Slider", {Label = "No. of decimals", Command = "Funbox_sizedecimals", Type="Integer",  Min = 0, Max = 4})	
 
+	local btnDelete = vgui.Create("DButton")
+	btnDelete:SetText("Delete Selected")
 
+	function btnDelete:DoClick()
+		if ctrl:GetSelected()[1] then
+			file.Delete("Funbox/"..ctrl:GetSelected()[1]:GetColumnText(1))
+			file.Delete("Funbox/Saves/"..ctrl:GetSelected()[1]:GetColumnText(1))
+			ctrl:Clear()
+			ctrl:UpdateValues()
+			ctrl:CreateItems()
+		end
+	end
+
+	CPanel:AddPanel(btnDelete)
 
 	local btnRefresh = vgui.Create("DButton")
 	btnRefresh:SetText("Refresh list")

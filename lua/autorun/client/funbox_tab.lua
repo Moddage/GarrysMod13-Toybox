@@ -1,3 +1,5 @@
+if !game.SinglePlayer() then return end
+
 local PANEL = {}
 
 /*---------------------------------------------------------

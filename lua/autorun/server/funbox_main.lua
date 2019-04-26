@@ -1,3 +1,5 @@
+if !game.SinglePlayer() then return end
+
 util.AddNetworkString("FunboxLoadGMA")
 util.AddNetworkString("FunboxSpawnWep")
 util.AddNetworkString("FunboxSpawnEnt")
