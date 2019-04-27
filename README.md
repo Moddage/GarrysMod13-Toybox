@@ -7,7 +7,7 @@ Note alot of the content in here is part of the old site and other libraries.
 
 ## Useful links
 - [Steam Workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=837437572)
-- [Development site](http://funbox.lethal-direct.com/ingame/)
+- [Development site](http://funbox.moddage.site/ingame/)
 - [Preview as of 18/05/16](https://www.youtube.com/watch?v=UuW6HVLQL1I)
 - Preview as of 11/03/16 (Lost will try and find later)
 - [Trello (keep track of progress)](https://trello.com/b/MFfdCxaD/garry-s-mod-13-toybox)
@@ -16,4 +16,3 @@ Note alot of the content in here is part of the old site and other libraries.
 - [Old facepunch thread](https://facepunch.com/showthread.php?t=1510102)
 - [Old-old facepunch thread](https://facepunch.com/showthread.php?t=1509545)
 - [rtm516's website](https://rtm516.co.uk/)
-- [Lethal Direct's site](https://lethal-direct.com/)
